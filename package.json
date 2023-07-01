@@ -46,5 +46,7 @@
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^2.0.0",
     "hardhat": "^2.12.5"
-  }
+  },
+  "proxy": "http://localhost:8080"
+
 }
