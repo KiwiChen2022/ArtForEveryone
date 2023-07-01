@@ -20,3 +20,16 @@ export const getTaskResult = async (taskId) => {
     return null;
   }
 };
+
+export const upscaleImage = async (taskId, position) => {
+  try {
+    const response = await axios.post("/upscale", {
+      taskId: taskId,
+      position: position,
+    });
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};

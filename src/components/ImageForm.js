@@ -1,7 +1,11 @@
 import React from "react";
 import { useState } from "react";
 import { CircularProgressbarWithChildren } from "react-circular-progressbar";
-import { createImage, getTaskResult } from "../utils/MidjourneyAPI";
+import {
+  createImage,
+  getTaskResult,
+  upscaleImage,
+} from "../utils/MidjourneyAPI";
 import { uploadNFT } from "../utils/NFTStorageAPI";
 
 function ImageForm({
@@ -21,6 +25,9 @@ function ImageForm({
   const [message, setMessage] = useState("");
 
   const [progress, setProgress] = useState(0);
+
+  const [position, setPosition] = useState(1);
+  const [taskId, setTaskId] = useState(null);
 
   const pollTaskResult = async (taskId) => {
     return new Promise((resolve, reject) => {
@@ -60,6 +67,20 @@ function ImageForm({
     });
   };
 
+  const handleUpscale = async () => {
+    if (!taskId) {
+      setMessage("No image to upload. Please generate an image first.");
+      return;
+    }
+    const upscaleResponse = await upscaleImage(taskId, position);
+    if (upscaleResponse && upscaleResponse.imageURL) {
+      setImage(upscaleResponse.imageURL);
+      console.log("Upscale succeeded, image url", upscaleResponse.imageURL);
+    } else {
+      console.log("Error occurred during upscaling");
+    }
+  };
+
   const handleUploadNFT = async () => {
     if (!image) {
       setMessage("No image to upload. Please generate an image first.");
@@ -67,15 +88,17 @@ function ImageForm({
     }
 
     setLoading(true);
+    console.log("upscaled image", image);
     const nftUrl = await uploadNFT(image, name, description);
-    setNfturl(nftUrl);
-    setLoading(false);
     console.log("nftUrl", nftUrl);
+    setNfturl(nftUrl);
     setMessage(
       nftUrl
         ? "Image uploaded successfully as NFT!"
         : "Error uploading the image as NFT. Please try again."
     );
+    setTimeout(() => {}, 10000);
+    setLoading(false);
   };
 
   const submitHandler = async (e) => {
@@ -83,10 +106,11 @@ function ImageForm({
 
     setLoading(true);
 
-    const taskId = await createImage(description);
-    if (taskId) {
-      console.log("taskId", taskId);
-      pollTaskResult(taskId)
+    const taskIdResponse = await createImage(description);
+    if (taskIdResponse) {
+      console.log("taskId", taskIdResponse);
+      setTaskId(taskIdResponse);
+      pollTaskResult(taskIdResponse)
         .then((imageURL) => {
           setImage(imageURL);
           setLoading(false); // stop loading
@@ -124,9 +148,27 @@ function ImageForm({
       <button onClick={handleUploadNFT}>Upload as NFT</button>
 
       {!loading && image ? (
-        <div className="image">
-          <img src={image} alt="AI Generated Content" />
-        </div>
+        <>
+          <div className="image">
+            <img src={image} alt="AI Generated Content" />
+          </div>
+          <div>
+            <button
+              onClick={() => setPosition(Math.max(1, position - 1))}
+              disabled={position === 1}
+            >
+              {"<"}
+            </button>
+            <input type="text" value={`Position: ${position}`} readOnly />
+            <button
+              onClick={() => setPosition(Math.min(4, position + 1))}
+              disabled={position === 4}
+            >
+              {">"}
+            </button>
+          </div>
+          <button onClick={handleUpscale}>Upscale</button>
+        </>
       ) : loading ? (
         <>
           <CircularProgressbarWithChildren value={progress}>
