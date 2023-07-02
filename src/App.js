@@ -1,53 +1,23 @@
-import React, { useState, useEffect } from "react";
-import { ethers } from "ethers";
-import { CircularProgressbarWithChildren } from "react-circular-progressbar";
-
-// Components
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import GetStartPage from "./pages/GetStartPage/GetStartPage";
+import MainPage from "./pages/MainPage";
 import Navigation from "./components/Navigation";
-import ImageForm from "./components/ImageForm";
-import ChatComponent from "./components/ChatComponent";
-
-// ABIs
-import NFT from "./abis/NFT.json";
-
-// Config
-import config from "./config.json";
-import { loadBlockchainData, mintImage } from "./utils/Blockchain";
+import { useState } from "react";
 
 function App() {
-  const [provider, setProvider] = useState(null);
   const [account, setAccount] = useState(null);
-  const [nft, setNFT] = useState(null);
-
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
-  const [nfturl, setNfturl] = useState(null);
-
-  useEffect(() => {
-    const loadData = async () => {
-      const { provider, nft } = await loadBlockchainData();
-      setProvider(provider);
-      setNFT(nft);
-    };
-    loadData();
-  }, []);
 
   return (
-    <div>
+    <>
       <Navigation account={account} setAccount={setAccount} />
-      <ImageForm
-        name={name}
-        setName={setName}
-        description={description}
-        setDescription={setDescription}
-        nfturl={nfturl}
-        setNfturl={setNfturl}
-        mintImage={mintImage}
-        provider={provider}
-        nft={nft}
-      />
-      <ChatComponent />
-    </div>
+      <Router>
+        <Routes>
+          <Route path="/" element={<GetStartPage />} />
+          <Route path="/main" element={<MainPage />} />
+        </Routes>
+      </Router>
+    </>
   );
 }
 

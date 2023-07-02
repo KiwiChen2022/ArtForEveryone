@@ -6,7 +6,8 @@ import {
   getTaskResult,
   upscaleImage,
 } from "../utils/MidjourneyAPI";
-import { uploadNFT } from "../utils/NFTStorageAPI";
+import { uploadImage } from "../utils/NFTStorageAPI";
+import axios from "axios";
 
 function ImageForm({
   name,
@@ -89,7 +90,32 @@ function ImageForm({
 
     setLoading(true);
     console.log("upscaled image", image);
-    const nftUrl = await uploadNFT(image, name, description);
+
+    // Download the image in the front end
+    let response;
+    try {
+      response = await axios.get(image, {
+        responseType: "arraybuffer",
+        headers: {
+          Accept: "image/png",
+        },
+      });
+    } catch (error) {
+      console.error("Failed to download image in the front end:", error);
+      setLoading(false);
+      return;
+    }
+
+    // Send the image data to the backend
+    let nftUrl;
+    try {
+      setMessage("Uploading Image...");
+
+      nftUrl = await uploadImage(response.data, name, description);
+    } catch (error) {
+      console.error("Failed to upload NFT:", error);
+    }
+
     console.log("nftUrl", nftUrl);
     setNfturl(nftUrl);
     setMessage(
