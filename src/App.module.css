@@ -1,0 +1,16 @@
+/* App.module.css */
+
+.appContainer {
+    background-color: #060606; /* black background */
+    color: #fff; /* white text color */
+    min-height: 100vh; /* occupy full viewport height */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px; /* some padding for better view */
+  }
+  
+  
+  body {
+    font-family: Arial;
+  }

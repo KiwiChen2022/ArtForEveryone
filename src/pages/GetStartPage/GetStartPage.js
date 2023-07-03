@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import style from "./GetStartPage.module.css";
+import NixieContainer from "../../components/Nixietube/Nixietube";
 
 function GetStartPage() {
   const navigate = useNavigate();
@@ -11,7 +12,8 @@ function GetStartPage() {
 
   return (
     <div>
-      <h1 className={style.neonText}>Welcome to Our App!</h1>
+      <div className={style.imageContainer} />
+      <NixieContainer number={1} />
       <button className={style.neonButton} onClick={handleGetStartClick}>
         Get Start
       </button>

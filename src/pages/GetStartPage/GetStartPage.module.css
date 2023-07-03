@@ -1,6 +1,12 @@
 .neonText {
     font-size: 36px;
     color: #fff;
+    
+  }
+  
+  .neonButton {
+    font-size: 24px;
+    color: #fff;
     text-shadow:
       0 0 5px #ff0000,
       0 0 10px #ff0000,
@@ -9,22 +15,44 @@
       0 0 25px #ff0000,
       0 0 30px #ff0000,
       0 0 35px #ff0000;
-  }
-  
-  .neonButton {
-    font-size: 24px;
-    color: #fff;
-    text-shadow:
-      0 0 5px #00ff00,
-      0 0 10px #00ff00,
-      0 0 15px #00ff00,
-      0 0 20px #00ff00,
-      0 0 25px #00ff00,
-      0 0 30px #00ff00,
-      0 0 35px #00ff00;
     border: none;
     background: none;
     cursor: pointer;
     outline: none;
   }
   
+  
+  .imageContainer {
+    width: 1050px; 
+    height: 600px; 
+    background-image: url('../../assets/images/cyber\ street\ 3.png'); 
+  }
+  
+  @media (max-width: 1200px) {
+    .imageContainer {
+      width: 875px;
+      height: 500px;
+    }
+  }
+
+  @media (max-width: 992px) {
+    .imageContainer {
+      width: 700px;
+      height: 400px;
+    }
+  }
+
+
+  @media (max-width: 768px) {
+    .imageContainer {
+      width: 525px;
+      height: 300px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .imageContainer {
+      width: 350px;
+      height: 200px;
+    }
+  }
