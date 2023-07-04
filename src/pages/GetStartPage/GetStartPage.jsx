@@ -2,9 +2,10 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "@emotion/styled";
 import NixieContainer from "../../components/Nixietube/Nixietube";
+import { Card } from "../../components/Card";
+
 
 const Container = styled.div`
-  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -36,6 +37,7 @@ function GetStartPage() {
 
   return (
     <Container>
+      <Card />
       <NixieContainer number={1} />
       <StartButton onClick={handleGetStartClick}>Get Start</StartButton>
     </Container>
