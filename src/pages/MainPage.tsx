@@ -24,8 +24,8 @@ function MainPage() {
   useEffect(() => {
     const loadData = async () => {
       const { provider, nft } = await loadBlockchainData();
-      setProvider(provider);
-      setNFT(nft);
+      // setProvider(provider);
+      // setNFT(nft);
     };
     loadData();
   }, []);

@@ -22,11 +22,11 @@
   }
   
   
-  .imageContainer {
+  /* .imageContainer {
     width: 1050px; 
     height: 600px; 
     background-image: url('../../assets/images/cyber\ street\ 3.png'); 
-  }
+  } */
   
   @media (max-width: 1200px) {
     .imageContainer {

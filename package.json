@@ -3,6 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@arwes/react": "^1.0.0-alpha.21",
+    "@arwes/react-animator": "^1.0.0-alpha.21",
+    "@arwes/react-bgs": "^1.0.0-alpha.21",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
     "@openzeppelin/contracts": "^4.8.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
@@ -47,7 +52,8 @@
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^2.0.0",
-    "hardhat": "^2.12.5"
+    "hardhat": "^2.12.5",
+    "typescript-plugin-css-modules": "^5.0.1"
   },
   "proxy": "http://localhost:8080"
 }
