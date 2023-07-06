@@ -8,6 +8,108 @@ import {
 } from "../utils/MidjourneyAPI";
 import { uploadImage } from "../utils/NFTStorageAPI";
 import axios from "axios";
+/** @jsxImportSource @emotion/react */
+import { css } from "@emotion/react";
+import { Animator, FrameSVGCorners } from "@arwes/react";
+import { Theme } from "../ThemeSettings";
+import { createTheme } from "../utils/createTheme";
+import { Frame } from "./Frame";
+
+const theme = createTheme({
+  outline: 3,
+});
+
+const cyberPunkStyle = css`
+  position: relative;
+  display: inline-block;
+  font-family: "Orbitron", sans-serif;
+  color: #0ff;
+  background: none;
+  padding: 20px;
+  margin: 0 auto;
+
+  input[type="text"] {
+    border: 2px solid #0ff;
+    background: transparent;
+    color: #0ff;
+    padding: 10px;
+    margin-bottom: 20px;
+    outline: none;
+    width: 100%;
+    box-sizing: border-box;
+
+    &::placeholder {
+      color: #0ff;
+    }
+
+    &:not(:last-child) {
+      margin-right: 10px;
+    }
+  }
+
+  input[type="submit"],
+  button {
+    border: 2px solid #0ff;
+    background: transparent;
+    color: #0ff;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.5s;
+    margin-top: 20px;
+
+    &:hover {
+      background: #0ff;
+      color: black;
+    }
+  }
+
+  .formContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .imageContainer {
+    position: relative;
+    width: 1000px;  // 调整为你想要的宽度
+    height: 1000px;  // 调整为你想要的高度
+    display: flex;  // 新增
+    align-items: center;  // 新增
+    justify-content: center;  // 新增
+    margin-bottom: 1rem;
+  }
+
+  .buttonsContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .positionContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .imageContainer img,
+  .imageContainer .frame {
+    position: absolute;
+  }
+
+  .imageContainer img {
+    max-width: 85%;  
+    max-height: 85%;  
+  }
+
+  .imageContainer .frame {
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }  
+
+`;
 
 function ImageForm({
   name,
@@ -151,68 +253,97 @@ function ImageForm({
   };
 
   return (
-    <div className="form">
-      <form onSubmit={submitHandler}>
-        <div className="form-group">
-          <input
-            type="text"
-            placeholder="Create a name..."
-            onChange={(e) => {
-              setName(e.target.value);
-            }}
-          ></input>
-          <input
-            type="text"
-            placeholder="Create a description..."
-            onChange={(e) => {
-              setDescription(e.target.value);
-            }}
-          ></input>
-          <input type="submit" value="Create" />
-        </div>
-      </form>
-      <button onClick={handleUploadNFT}>Upload as NFT</button>
-
-      {!loading && image ? (
-        <>
-          <div className="image">
-            <img src={image} alt="AI Generated Content" />
-          </div>
+    <div css={cyberPunkStyle}>
+      <Animator animate>
+        <FrameSVGCorners
+          css={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            zIndex: -1,
+            "& [data-name=bg]": {
+              color: `${theme.color.primary(1)} !important`,
+            },
+            "& [data-name=line]": {
+              color: `${theme.color.primary(4)} !important`,
+            },
+          }}
+          strokeWidth={2}
+        />
+      </Animator>
+      <div className="formContainer">
+        <form onSubmit={submitHandler}>
           <div>
-            <button
-              onClick={() => setPosition(Math.max(1, position - 1))}
-              disabled={position === 1}
-            >
-              {"<"}
-            </button>
-            <input type="text" value={`Position: ${position}`} readOnly />
-            <button
-              onClick={() => setPosition(Math.min(4, position + 1))}
-              disabled={position === 4}
-            >
-              {">"}
-            </button>
+            <input
+              type="text"
+              placeholder="Create a name..."
+              onChange={(e) => {
+                setName(e.target.value);
+              }}
+            ></input>
+            <input
+              type="text"
+              placeholder="Create a description..."
+              onChange={(e) => {
+                setDescription(e.target.value);
+              }}
+            ></input>
+            <input type="submit" value="Create" />
           </div>
-          <button onClick={handleUpscale}>Upscale</button>
-        </>
-      ) : loading ? (
-        <>
-          <CircularProgressbarWithChildren value={progress}>
-            <img
-              style={{ width: 40, marginTop: -5 }}
-              src="https://i.imgur.com/b9NyUGm.png"
-              alt="doge"
-            />
-            <div style={{ fontSize: 12, marginTop: -5 }}>
-              <strong>{progress}%</strong> mate
-            </div>
-          </CircularProgressbarWithChildren>
-          <p>{message}</p>
-        </>
-      ) : (
-        <></>
-      )}
+        </form>
+        <div className="imageContainer">
+        {!loading && image ? (
+          <>
+              <img src={image} alt="AI Generated Content" />
+          </>
+          ) : loading ? (
+            <>
+            <CircularProgressbarWithChildren value={progress}>
+              <img
+                style={{ width: 40, marginTop: -5 }}
+                src="https://i.imgur.com/b9NyUGm.png"
+                alt="doge"
+              />
+              <div style={{ fontSize: 12, marginTop: -5 }}>
+                <strong>{progress}%</strong> mate
+              </div>
+            </CircularProgressbarWithChildren>
+            <p>{message}</p>
+          </>
+          ) : (
+            <></>
+        )}
+        <div className="frame">
+            <Frame  />
+        </div>
+        </div>
+      </div>
+       {/* buttons */}
+      {image && (
+      <div className="buttonsContainer">
+        <button onClick={handleUploadNFT}>Upload as NFT</button>
 
+        <div className="positionContainer">
+          <button
+            onClick={() => setPosition(Math.max(1, position - 1))}
+            disabled={position === 1}
+          >
+            {"<"}
+          </button>
+          <input type="text" value={`Position: ${position}`} readOnly />
+          <button
+            onClick={() => setPosition(Math.min(4, position + 1))}
+            disabled={position === 4}
+          >
+            {">"}
+          </button>
+        </div>
+
+        <button onClick={handleUpscale}>Upscale</button>
+      </div>
+    )}
       {!loading && nfturl ? (
         <p>
           View&nbsp;

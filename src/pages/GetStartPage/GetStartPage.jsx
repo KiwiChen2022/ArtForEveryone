@@ -13,9 +13,9 @@ const Container = styled.div`
 `;
 
 const StartButton = styled.button`
-  border: 1px solid lime;
+  border: 1px solid #0ff;
   background: transparent;
-  color: lime;
+  color: #0ff;
   padding: 10px 20px;
   cursor: pointer;
   font-size: 1.2rem;
@@ -23,7 +23,7 @@ const StartButton = styled.button`
   margin-top: 2rem;
 
   &:hover {
-    background: lime;
+    background: #0ff;
     color: black;
   }
 `;

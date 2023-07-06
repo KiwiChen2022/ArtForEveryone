@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 
 // create styled components
 const Nav = styled.nav`
-    color: lime;
+    color: #0ff;
     display: flex;
     justify-content: space-between;
     padding: 20px;
@@ -13,14 +13,14 @@ const Nav = styled.nav`
 const Brand = styled.div`
     font-size: 1.5rem;
     font-weight: bold;
-    text-shadow: 0 0 10px lime, 0 0 20px lime, 0 0 30px lime, 0 0 40px lime;
+    text-shadow: 0 0 10px #0ff, 0 0 20px #0ff, 0 0 30px #0ff, 0 0 40px #0ff;
     user-select: none;
 `;
 
 const ConnectButton = styled.button`
-    border: 1px solid lime;
+    border: 1px solid #0ff;
     background: transparent;
-    color: lime;
+    color: #0ff;
     padding: 10px 20px;
     cursor: pointer;
     font-size: 1rem;
@@ -28,14 +28,14 @@ const ConnectButton = styled.button`
     margin-left: 20px;
 
     &:hover {
-        background: lime;
+        background: #0ff;
         color: black;
     }
 `;
 
 const LinkIcon = styled.a`
     margin-left: 10px; 
-    color: lime; 
+    color: #0ff; 
     transition: color 0.3s ease;
 
     &:hover {

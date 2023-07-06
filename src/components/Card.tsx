@@ -11,6 +11,7 @@ import {
 } from "@arwes/react";
 import { Theme } from "../ThemeSettings";
 import { createTheme } from "../utils/createTheme";
+import { Frame } from "./Frame";
 
 export const Card = (): ReactElement => {
   const bleeps = useBleeps();
@@ -28,10 +29,12 @@ export const Card = (): ReactElement => {
         style={{
           position: "relative",
           display: "block",
-          maxWidth: "700px",
+          maxWidth: "1100px",
           margin: theme.space([4, "auto"]),
-          padding: theme.space(8),
-          textAlign: "center",
+          padding: theme.space(4),
+          textAlign: "left",
+          backgroundColor: "black",
+          marginTop: "3rem",
         }}
         // Effects for entering and exiting animation transitions.
         animated={[aaVisibility(), aa("y", "2rem", 0)]}
@@ -53,13 +56,14 @@ export const Card = (): ReactElement => {
         </Animator>
 
         <Animator>
-          <Text as="h1">
+          <Text as="h4">
             Artistry Unleashed: AI-Powered Custom NFT Creation for Everyone
           </Text>
         </Animator>
 
         <Animator>
           <Text>
+            <p></p>
             Welcome to our innovative AI NFT Web Application, where art meets
             technology in the most extraordinary way. We believe that everyone
             deserves the opportunity to revel in the joy of artistic creation,
