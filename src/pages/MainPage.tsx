@@ -43,7 +43,6 @@ function MainPage() {
         provider={provider}
         nft={nft}
       />
-      <ChatComponent />
     </div>
   );
 }

@@ -14,6 +14,7 @@ import { Animator, FrameSVGCorners } from "@arwes/react";
 import { Theme } from "../ThemeSettings";
 import { createTheme } from "../utils/createTheme";
 import { Frame } from "./Frame";
+import ChatComponent from "./ChatComponent";
 
 const theme = createTheme({
   outline: 3,
@@ -27,36 +28,59 @@ const cyberPunkStyle = css`
   background: none;
   padding: 20px;
   margin: 0 auto;
+  display: flex;
+  justify-content: center;
 
-  input[type="text"] {
+  a {
+    color: #0ff;
+    text-decoration: none;
+    border: 2px solid #0ff;
+    padding: 5px 10px;
+    display: inline-block;
+    transition: background 0.5s;
+    &:hover {
+      background: #0ff;
+      color: black;
+    }
+}
+
+
+  input[type="text"], textarea {
     border: 2px solid #0ff;
     background: transparent;
     color: #0ff;
     padding: 10px;
     margin-bottom: 20px;
     outline: none;
-    width: 100%;
+    width: 80%; //设置默认宽度为50%
+    min-width: 120px; //设置最小宽度
+    max-width: 100%; //设置最大宽度
     box-sizing: border-box;
-
+    overflow: auto; //当文本过长时，显示滚动条
+  
     &::placeholder {
       color: #0ff;
     }
-
+  
     &:not(:last-child) {
       margin-right: 10px;
     }
   }
+  
+  textarea {
+    height: 100px; // 设置textarea的默认高度
+    resize: none; // 禁止textarea的拖动
+  }
 
-  input[type="submit"],
-  button {
+  input[type="submit"], button, input[type="button"] {
     border: 2px solid #0ff;
     background: transparent;
     color: #0ff;
-    padding: 10px 20px;
+    padding: 10px 15px;
     cursor: pointer;
     font-size: 1rem;
     transition: background 0.5s;
-    margin-top: 20px;
+    margin-top: 10px;
 
     &:hover {
       background: #0ff;
@@ -64,33 +88,30 @@ const cyberPunkStyle = css`
     }
   }
 
+  button {
+    width: 160px;
+  }
+
   .formContainer {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center;
+  }
+
+  .formContainer input[type="text"] {
+    font-size: 1rem;
   }
 
   .imageContainer {
     position: relative;
-    width: 1000px;  // 调整为你想要的宽度
-    height: 1000px;  // 调整为你想要的高度
+    min-width: 700px;
+    min-height: 700px;
+    width: 700px;  // 调整为你想要的百分比
+    height: 700px;  // 设置高度为 0
     display: flex;  // 新增
     align-items: center;  // 新增
     justify-content: center;  // 新增
     margin-bottom: 1rem;
-  }
-
-  .buttonsContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .positionContainer {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
   }
 
   .imageContainer img,
@@ -107,7 +128,36 @@ const cyberPunkStyle = css`
     width: 100%;
     height: 100%;
     z-index: -1;
-  }  
+  }
+
+  .buttonsContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;  // 新增
+  }
+
+  .positionContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .positionContainer input[type="text"] {
+    padding: 0;
+    text-align: center;
+    background: transparent;
+    line-height: 4; /* 调整这个值以改变文本的垂直位置 */
+    font-size: 1rem;
+    margin: 20px;
+    margin-top: 30px;
+  }
+
+  form input[type="submit"] {
+    display: block;
+  }
+    
 
 `;
 
@@ -264,7 +314,8 @@ function ImageForm({
             height: "100%",
             zIndex: -1,
             "& [data-name=bg]": {
-              color: `${theme.color.primary(1)} !important`,
+              // color: `${theme.color.primary(1)} !important`,
+              color: `hsla(180, 75%, 10%,0.5) !important`, 
             },
             "& [data-name=line]": {
               color: `${theme.color.primary(4)} !important`,
@@ -275,7 +326,10 @@ function ImageForm({
       </Animator>
       <div className="formContainer">
         <form onSubmit={submitHandler}>
+          <ChatComponent />
+
           <div>
+            <p><b>Create Your Image</b></p>
             <input
               type="text"
               placeholder="Create a name..."
@@ -283,14 +337,13 @@ function ImageForm({
                 setName(e.target.value);
               }}
             ></input>
-            <input
-              type="text"
+            <textarea
               placeholder="Create a description..."
               onChange={(e) => {
                 setDescription(e.target.value);
               }}
-            ></input>
-            <input type="submit" value="Create" />
+            ></textarea>
+            <button type="submit">Create</button>
           </div>
         </form>
         <div className="imageContainer">
@@ -306,8 +359,8 @@ function ImageForm({
                 src="https://i.imgur.com/b9NyUGm.png"
                 alt="doge"
               />
-              <div style={{ fontSize: 12, marginTop: -5 }}>
-                <strong>{progress}%</strong> mate
+              <div style={{ fontSize: 20, marginTop: -5 }}>
+                <strong>{progress}%</strong> 
               </div>
             </CircularProgressbarWithChildren>
             <p>{message}</p>
@@ -321,30 +374,30 @@ function ImageForm({
         </div>
       </div>
        {/* buttons */}
-      {image && (
+      
       <div className="buttonsContainer">
-        <button onClick={handleUploadNFT}>Upload as NFT</button>
+        <button onClick={handleUpscale}>Upscale</button>
 
         <div className="positionContainer">
-          <button
-            onClick={() => setPosition(Math.max(1, position - 1))}
-            disabled={position === 1}
-          >
-            {"<"}
-          </button>
-          <input type="text" value={`Position: ${position}`} readOnly />
-          <button
-            onClick={() => setPosition(Math.min(4, position + 1))}
-            disabled={position === 4}
-          >
-            {">"}
-          </button>
-        </div>
-
-        <button onClick={handleUpscale}>Upscale</button>
+        <input 
+          type="button" 
+          value="<" 
+          onClick={() => setPosition(Math.max(1, position - 1))}
+          disabled={position === 1}
+        />
+        <input type="text" value={`Position: ${position}`} readOnly />
+        <input
+          type="button"
+          value=">"
+          onClick={() => setPosition(Math.min(4, position + 1))}
+          disabled={position === 4}
+        />
       </div>
-    )}
-      {!loading && nfturl ? (
+
+
+        <button onClick={handleUploadNFT}>Upload as NFT</button>
+
+        {!loading && nfturl ? (
         <p>
           View&nbsp;
           <a href={nfturl} target="_blank" rel="noreferrer">
@@ -354,6 +407,9 @@ function ImageForm({
       ) : (
         <></>
       )}
+      </div>
+    
+      
     </div>
   );
 }
