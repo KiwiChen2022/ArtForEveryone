@@ -2,7 +2,10 @@ import axios from "axios";
 
 export const createImage = async (prompt) => {
   try {
-    const response = await axios.post("/api/imagine", { prompt: prompt });
+    const response = await axios.post(
+      `${process.env.REACT_APP_GATEWAY_URL}/api/imagine`,
+      { prompt: prompt }
+    );
     console.log(response.data);
     return response.data.taskId;
   } catch (error) {
@@ -13,7 +16,10 @@ export const createImage = async (prompt) => {
 
 export const getTaskResult = async (taskId) => {
   try {
-    const response = await axios.post("/api/result", { taskId: taskId });
+    const response = await axios.post(
+      `${process.env.REACT_APP_GATEWAY_URL}/api/result`,
+      { taskId: taskId }
+    );
     return response.data;
   } catch (error) {
     console.log(error);
@@ -23,10 +29,13 @@ export const getTaskResult = async (taskId) => {
 
 export const upscaleImage = async (taskId, position) => {
   try {
-    const response = await axios.post("/api/upscale", {
-      taskId: taskId,
-      position: position,
-    });
+    const response = await axios.post(
+      `${process.env.REACT_APP_GATEWAY_URL}/api/upscale`,
+      {
+        taskId: taskId,
+        position: position,
+      }
+    );
     return response.data;
   } catch (error) {
     console.log(error);

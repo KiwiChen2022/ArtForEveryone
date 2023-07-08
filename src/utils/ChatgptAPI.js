@@ -3,8 +3,9 @@ import axios from "axios";
 export const sendMessageApi = async (newMessages) => {
   try {
     console.log("Sending request...");
+    console.log(process.env.REACT_APP_GATEWAY_URL);
     const response = await axios.post(
-      "/api/chat",
+      `${process.env.REACT_APP_GATEWAY_URL}/api/chat`,
       { messages: newMessages },
       { timeout: 30000 }
     );

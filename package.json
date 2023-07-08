@@ -52,6 +52,5 @@
     "@nomicfoundation/hardhat-toolbox": "^2.0.0",
     "hardhat": "^2.12.5",
     "typescript-plugin-css-modules": "^5.0.1"
-  },
-  "proxy": "http://localhost:8080"
+  }
 }
