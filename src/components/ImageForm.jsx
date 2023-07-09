@@ -213,6 +213,7 @@ function ImageForm({
             clearInterval(interval);
             console.log("image url", result.imageURL); // print the image URL
             resolve(result.imageURL);
+            setProgress(0);
           } else {
             // If we received an unknown status or no data at all, reject the promise
             clearInterval(interval);
@@ -369,11 +370,7 @@ function ImageForm({
           ) : loading ? (
             <>
             <CircularProgressbarWithChildren value={progress}>
-              <img
-                style={{ width: 40, marginTop: -5 }}
-                src="https://i.imgur.com/b9NyUGm.png"
-                alt="doge"
-              />
+              
               <div style={{ fontSize: 20, marginTop: -5 }}>
                 <strong>{progress}%</strong> 
               </div>
