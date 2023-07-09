@@ -11,6 +11,7 @@ const cyberPunkStyle = css`
   display: flex;
   flex-direction: column;
   margin-bottom: 100px;
+  width: 100%;
 
   label {
     display: block;

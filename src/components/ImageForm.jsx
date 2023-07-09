@@ -96,7 +96,18 @@ const cyberPunkStyle = css`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex: 10;
   }
+
+  .formContainer__left{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    min-width: 300px;
+    flex: 4;
+  }
+
 
   .formContainer input[type="text"] {
     font-size: 1rem;
@@ -106,12 +117,11 @@ const cyberPunkStyle = css`
     position: relative;
     min-width: 700px;
     min-height: 700px;
-    width: 700px;  // 调整为你想要的百分比
-    height: 700px;  // 设置高度为 0
     display: flex;  // 新增
     align-items: center;  // 新增
     justify-content: center;  // 新增
     margin-bottom: 1rem;
+    flex: 7;
   }
 
   .imageContainer img,
@@ -135,6 +145,7 @@ const cyberPunkStyle = css`
     flex-direction: column;
     align-items: center;
     justify-content: center;  // 新增
+    flex: 3;
   }
 
   .positionContainer {
@@ -231,6 +242,7 @@ function ImageForm({
       console.log("Upscale succeeded, image url", upscaleResponse.imageURL);
     } else {
       console.log("Error occurred during upscaling");
+      console.log(upscaleResponse);
     }
   };
 
@@ -325,27 +337,30 @@ function ImageForm({
         />
       </Animator>
       <div className="formContainer">
-        <form onSubmit={submitHandler}>
+        <div className="formContainer__left">
           <ChatComponent />
 
-          <div>
-            <p><b>Create Your Image</b></p>
-            <input
-              type="text"
-              placeholder="Create a name..."
-              onChange={(e) => {
-                setName(e.target.value);
-              }}
-            ></input>
-            <textarea
-              placeholder="Create a description..."
-              onChange={(e) => {
-                setDescription(e.target.value);
-              }}
-            ></textarea>
-            <button type="submit">Create</button>
-          </div>
-        </form>
+          <form onSubmit={submitHandler}>
+
+            <div>
+              <p><b>Create Your Image</b></p>
+              <input
+                type="text"
+                placeholder="Create a name..."
+                onChange={(e) => {
+                  setName(e.target.value);
+                }}
+              ></input>
+              <textarea
+                placeholder="Create a description..."
+                onChange={(e) => {
+                  setDescription(e.target.value);
+                }}
+              ></textarea>
+              <button type="submit">Create</button>
+            </div>
+          </form>
+        </div>
         <div className="imageContainer">
         {!loading && image ? (
           <>
