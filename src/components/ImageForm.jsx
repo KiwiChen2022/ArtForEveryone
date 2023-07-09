@@ -15,6 +15,9 @@ import { Theme } from "../ThemeSettings";
 import { createTheme } from "../utils/createTheme";
 import { Frame } from "./Frame";
 import ChatComponent from "./ChatComponent";
+import { Spinner } from "react-bootstrap";
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 const theme = createTheme({
   outline: 3,
@@ -368,15 +371,12 @@ function ImageForm({
               <img src={image} alt="AI Generated Content" />
           </>
           ) : loading ? (
-            <>
-            <CircularProgressbarWithChildren value={progress}>
-              
-              <div style={{ fontSize: 20, marginTop: -5 }}>
-                <strong>{progress}%</strong> 
-              </div>
-            </CircularProgressbarWithChildren>
-            <p>{message}</p>
-          </>
+            <div style={{ textAlign: 'center', padding: '2em' }}>
+            <Spinner animation="border" role="status" variant="info"  />
+            <p style={{ fontSize: 20, marginTop: -5 }}>
+              <strong>{progress}%</strong>
+            </p>
+        </div>
           ) : (
             <></>
         )}
