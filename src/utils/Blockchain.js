@@ -9,7 +9,7 @@ export const loadBlockchainData = async () => {
   const network = await provider.getNetwork();
   const nft = new ethers.Contract(
     config[network.chainId].nft.address,
-    NFT,
+    NFT.abi,
     provider
   );
 
@@ -20,7 +20,7 @@ export const mintImage = async (provider, nft, metadataUrl) => {
   const signer = provider.getSigner();
   const tx = await nft
     .connect(signer)
-    .mint(metadataUrl, { value: ethers.utils.parseEther("1") });
+    .mint(metadataUrl, { value: ethers.utils.parseEther("0.01") });
 
   const receipt = await tx.wait();
   console.log("Minted image:", receipt);

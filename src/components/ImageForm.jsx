@@ -7,6 +7,7 @@ import {
   upscaleImage,
 } from "../utils/MidjourneyAPI";
 import { uploadImage } from "../utils/NFTStorageAPI";
+import { mintImage } from "../utils/Blockchain";
 import axios from "axios";
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
@@ -17,6 +18,7 @@ import { Frame } from "./Frame";
 import ChatComponent from "./ChatComponent";
 import { Spinner } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import eventEmitter from "../utils/eventEmitter";
 
 
 const theme = createTheme({
@@ -182,14 +184,14 @@ function ImageForm({
   setDescription,
   nfturl,
   setNfturl,
-  mintImage,
   provider,
   nft,
+  account,
+  setMessage,
 }) {
   const [image, setImage] = useState(null);
 
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState("");
 
   const [progress, setProgress] = useState(0);
 
@@ -202,8 +204,11 @@ function ImageForm({
         try {
           const result = await getTaskResult(taskId);
           console.log(result); // print the whole result
-
-          if (
+  
+          if (!result || Object.keys(result).length === 0) {
+            // Handle empty response, keep polling
+            console.log("Empty response, keep polling.");
+          } else if (
             result.status === "pending" ||
             result.status === "waiting-to-start"
           ) {
@@ -228,16 +233,19 @@ function ImageForm({
           }
         } catch (error) {
           console.log(error);
+          const temp = error.message || "Error";
+          eventEmitter.emit("apiError", temp);
           clearInterval(interval);
           reject(error);
         }
-      }, 5000); // Poll every 5 seconds
+      }, 8000); // Poll every 8 seconds
     });
   };
-
+  
+  
   const handleUpscale = async () => {
     if (!taskId) {
-      setMessage("No image to upload. Please generate an image first.");
+      setMessage("No image to upscale. Please generate an image first.");
       return;
     }
     const upscaleResponse = await upscaleImage(taskId, position);
@@ -256,6 +264,18 @@ function ImageForm({
       return;
     }
 
+    if(!provider || !account) {
+      setMessage("Please connect your wallet first.");
+      console.log("Please connect your wallet first.");
+      return;
+    }
+
+    if(!name || !description) {
+      setMessage("Please enter name and description.");
+      console.log("Please enter name and description.");
+      return;
+    }
+
     setLoading(true);
     console.log("upscaled image", image);
 
@@ -270,6 +290,8 @@ function ImageForm({
       });
     } catch (error) {
       console.error("Failed to download image in the front end:", error);
+      const temp = error.message || "Error";
+      eventEmitter.emit("apiError", temp);
       setLoading(false);
       return;
     }
@@ -282,6 +304,8 @@ function ImageForm({
       nftUrl = await uploadImage(response.data, name, description);
     } catch (error) {
       console.error("Failed to upload NFT:", error);
+      const temp = error.message || "Error";
+      eventEmitter.emit("apiError", temp);
     }
 
     console.log("nftUrl", nftUrl);
@@ -291,7 +315,15 @@ function ImageForm({
         ? "Image uploaded successfully as NFT!"
         : "Error uploading the image as NFT. Please try again."
     );
-    setTimeout(() => {}, 10000);
+    try {
+      await mintImage(provider, nft, nftUrl);
+      setMessage("NFT minted successfully!");
+    } catch (error) {
+      console.error("Failed to mint NFT:", error);
+      const temp = error.message || "Error";
+      eventEmitter.emit("apiError", temp);
+    }
+    
     setLoading(false);
   };
 
@@ -315,7 +347,7 @@ function ImageForm({
         });
     }
     setProgress(0); // reset progress bar
-    setMessage(""); // clear message
+    setMessage(null); // clear message
   };
 
   return (
@@ -406,9 +438,7 @@ function ImageForm({
         />
       </div>
 
-
-        <button onClick={handleUploadNFT}>Upload as NFT</button>
-
+        <button onClick={handleUploadNFT}>Mint</button>
         {!loading && nfturl ? (
         <p>
           View&nbsp;
@@ -420,8 +450,6 @@ function ImageForm({
         <></>
       )}
       </div>
-    
-      
     </div>
   );
 }

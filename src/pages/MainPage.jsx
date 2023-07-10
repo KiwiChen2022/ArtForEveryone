@@ -4,16 +4,10 @@ import { CircularProgressbarWithChildren } from "react-circular-progressbar";
 
 // Components
 import ImageForm from "../components/ImageForm";
-import ChatComponent from "../components/ChatComponent";
 
-// ABIs
-import NFT from "../abis/NFT.json";
+import { loadBlockchainData } from "../utils/Blockchain";
 
-// Config
-import config from "../config.json";
-import { loadBlockchainData, mintImage } from "../utils/Blockchain";
-
-function MainPage() {
+function MainPage({account, setMessage}) {
   const [provider, setProvider] = useState(null);
   const [nft, setNFT] = useState(null);
 
@@ -24,8 +18,8 @@ function MainPage() {
   useEffect(() => {
     const loadData = async () => {
       const { provider, nft } = await loadBlockchainData();
-      // setProvider(provider);
-      // setNFT(nft);
+      setProvider(provider);
+      setNFT(nft);
     };
     loadData();
   }, []);
@@ -39,9 +33,10 @@ function MainPage() {
         setDescription={setDescription}
         nfturl={nfturl}
         setNfturl={setNfturl}
-        mintImage={mintImage}
         provider={provider}
         nft={nft}
+        account={account}
+        setMessage={setMessage}
       />
     </div>
   );

@@ -1,4 +1,5 @@
 import axios from "axios";
+import eventEmitter from "./eventEmitter";
 
 export const createImage = async (prompt) => {
   try {
@@ -10,6 +11,8 @@ export const createImage = async (prompt) => {
     return response.data.taskId;
   } catch (error) {
     console.log(error);
+    const message = error.message || "Error";
+    eventEmitter.emit("apiError", message);
     return null;
   }
 };
@@ -23,6 +26,8 @@ export const getTaskResult = async (taskId) => {
     return response.data;
   } catch (error) {
     console.log(error);
+    const message = error.message || "Error";
+    eventEmitter.emit("apiError", message);
     return null;
   }
 };
@@ -39,6 +44,8 @@ export const upscaleImage = async (taskId, position) => {
     return response.data;
   } catch (error) {
     console.log(error);
+    const message = error.message || "Error";
+    eventEmitter.emit("apiError", message);
     return null;
   }
 };

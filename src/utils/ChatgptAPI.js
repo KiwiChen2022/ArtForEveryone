@@ -1,4 +1,5 @@
 import axios from "axios";
+import eventEmitter from "./eventEmitter";
 
 export const sendMessageApi = async (newMessages) => {
   try {
@@ -14,6 +15,8 @@ export const sendMessageApi = async (newMessages) => {
     return response.data.message;
   } catch (error) {
     console.error("Error occurred during the API call: ", error);
+    const message = error.message || "Error";
+    eventEmitter.emit("apiError", message);
     return null;
   }
 };

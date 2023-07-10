@@ -12,7 +12,7 @@ export const uploadImage = async (imageData, name, description) => {
 
   // Send request to store image
   const { ipnft } = await nftstorage.store({
-    image: new File([blob], "image.png"),
+    image: new File([blob], "image.png", { type: "image/png" }),
     name: name,
     description: description,
   });
