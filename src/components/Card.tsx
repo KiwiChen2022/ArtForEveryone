@@ -1,9 +1,9 @@
 import React, { ReactElement } from "react";
-import { Animator } from "@arwes/react";
 import {
   useBleeps,
   BleepsOnAnimator,
   Animated,
+  Animator,
   FrameSVGCorners,
   Text,
   aa,
@@ -11,7 +11,6 @@ import {
 } from "@arwes/react";
 import { Theme } from "../ThemeSettings";
 import { createTheme } from "../utils/createTheme";
-import { Frame } from "./Frame";
 
 export const Card = (): ReactElement => {
   const bleeps = useBleeps();
@@ -44,25 +43,34 @@ export const Card = (): ReactElement => {
         {/* Frame decoration and shape colors defined by CSS. */}
         <style>{`
             .card .arwes-react-frames-framesvg [data-name=bg] {
-              color: ${theme.color.primary(1)};
+              color: hsla(200,81%,50%,0.1);
             }
             .card .arwes-react-frames-framesvg [data-name=line] {
-              color: ${theme.color.primary(4)};
+              color: hsla(200,84%,54.74%,1);
             }
           `}</style>
 
         <Animator>
-          <FrameSVGCorners strokeWidth={2} />
+          <FrameSVGCorners
+            strokeWidth={2}
+            style={{ color: "hsla(200,81%,50%,0.1)" }}
+          />
         </Animator>
 
         <Animator>
-          <Text as="h4">
+          <Text
+            as="h4"
+            style={{
+              color: "rgb(43, 172, 237)",
+              textShadow: "rgb(43, 172, 237) 0px 0px 1px",
+            }}
+          >
             Artistry Unleashed: AI-Powered Custom NFT Creation for Everyone
           </Text>
         </Animator>
 
         <Animator>
-          <Text>
+          <Text style={{ color: "rgb(159, 197, 216)", lineHeight: "1.5" }}>
             <p></p>
             Welcome to our innovative AI NFT Web Application, where art meets
             technology in the most extraordinary way. We believe that everyone

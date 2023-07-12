@@ -1,19 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { ethers } from "ethers";
-import { CircularProgressbarWithChildren } from "react-circular-progressbar";
-
-// Components
-import ImageForm from "../components/ImageForm";
-
 import { loadBlockchainData } from "../utils/Blockchain";
+import MainConsole from "../components/MainConsole";
 
 function MainPage({account, setMessage}) {
   const [provider, setProvider] = useState(null);
   const [nft, setNFT] = useState(null);
-
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
-  const [nfturl, setNfturl] = useState(null);
 
   useEffect(() => {
     const loadData = async () => {
@@ -26,13 +17,7 @@ function MainPage({account, setMessage}) {
 
   return (
     <div>
-      <ImageForm
-        name={name}
-        setName={setName}
-        description={description}
-        setDescription={setDescription}
-        nfturl={nfturl}
-        setNfturl={setNfturl}
+      <MainConsole
         provider={provider}
         nft={nft}
         account={account}
