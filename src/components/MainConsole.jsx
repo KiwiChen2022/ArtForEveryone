@@ -32,6 +32,7 @@ const cyberPunkStyle = css`
   margin: 0 auto;
   display: flex;
   justify-content: center;
+  margin-top: 20px;
 
   a {
     color: #0ff;
@@ -198,6 +199,7 @@ function MainConsole({ provider, nft, account, setMessage }) {
             console.log("Empty response, keep polling.");
           } else if (
             result.status === "pending" ||
+            result.status === "paused" ||
             result.status === "waiting-to-start"
           ) {
             // Keep polling, do nothing here

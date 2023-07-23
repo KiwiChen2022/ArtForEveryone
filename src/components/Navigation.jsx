@@ -1,5 +1,6 @@
 import { ethers } from "ethers";
 import styled from "@emotion/styled";
+import eventEmitter from "../utils/eventEmitter";
 
 // create styled components
 const Nav = styled.nav`
@@ -48,24 +49,65 @@ const Actions = styled.div`
   gap: 10px;
 `;
 
+// check MetaMask
+const checkMetaMaskInstalled = () => {
+  if (!window.ethereum) {
+    eventEmitter.emit(
+      "apiError",
+      "Please install MetaMask to use this application."
+    );
+    return false;
+  }
+  return true;
+};
+
+// check Network
+const expectedChainId = 11155111;
+const expectedNetwork = "Sepolia Testnet";
+
+const checkNetwork = async (provider) => {
+  const network = await provider.getNetwork();
+  if (network.chainId !== expectedChainId) {
+    eventEmitter.emit(
+      "apiError",
+      `Please switch network to ${expectedNetwork}`
+    );
+    return false;
+  }
+  return true;
+};
+
 // use styled components
 const Navigation = ({ account, setAccount }) => {
   const connectHandler = async () => {
+    // Check if the user has MetaMask installed
+    if (!checkMetaMaskInstalled()) return;
+
+    // check if the user is on the correct network
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const isCorrectNetwork = await checkNetwork(provider);
+
+    if (!isCorrectNetwork) {
+      // Optionally, you could show an error message to the user here
+      return;
+    }
+
     const accounts = await window.ethereum.request({
       method: "eth_requestAccounts",
     });
     const account = ethers.utils.getAddress(accounts[0]);
+
     setAccount(account);
   };
 
   return (
     <Nav>
       <Brand>
-        <h1>AI NFT Generator</h1>
+        <h1>AI-ART-NFT </h1>
       </Brand>
       <Actions>
         <LinkIcon
-          href="https://github.com/sponsors/romelperez"
+          href="https://github.com/KiwiChen2022"
           target="_blank"
           title="Sponsor"
         >
@@ -88,7 +130,7 @@ const Navigation = ({ account, setAccount }) => {
 
         {/*  GitHub Icon  */}
         <LinkIcon
-          href="https://github.com/sponsors/romelperez"
+          href="https://github.com/KiwiChen2022"
           target="_blank"
           title="Sponsor"
         >
@@ -112,7 +154,7 @@ const Navigation = ({ account, setAccount }) => {
 
         {/* Discord Icon*/}
         <LinkIcon
-          href="https://discord.gg/s5sbTkw"
+          href="https://discord.gg/8wZA5p5n"
           target="_blank"
           title="Go to Discord"
         >
@@ -145,7 +187,7 @@ const Navigation = ({ account, setAccount }) => {
 
         {/* Twitter Icon*/}
         <LinkIcon
-          href="https://twitter.com/arwesjs"
+          href="https://twitter.com/kiwichen2022"
           target="_blank"
           title="Go to Twitter"
         >

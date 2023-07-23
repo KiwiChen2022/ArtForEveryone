@@ -20,13 +20,21 @@ function App() {
   const [provider, setProvider] = useState<any>(null);
   const [nft, setNFT] = useState<any>(null);
 
+  const loadData = async () => {
+    const blockchainData = await loadBlockchainData();
+
+    if (!blockchainData) {
+      console.error("Failed to load blockchain data");
+      return;
+    }
+    const { provider, nft } = blockchainData;
+    setProvider(provider);
+    setNFT(nft);
+  };
+
   useEffect(() => {
     // Load blockchain data
-    const loadData = async () => {
-      const { provider, nft } = await loadBlockchainData();
-      setProvider(provider);
-      setNFT(nft);
-    };
+
     loadData();
 
     // Handle API errors
@@ -37,8 +45,20 @@ function App() {
 
     eventEmitter.on("apiError", handleError);
 
+    // Retry loading blockchain data when the network changes
+    const handleChainChanged = () => {
+      loadData();
+    };
+
+    if (window.ethereum) {
+      window.ethereum.on("chainChanged", handleChainChanged);
+    }
+
     return () => {
       eventEmitter.removeListener("apiError", handleError);
+      if (window.ethereum) {
+        window.ethereum.removeListener("chainChanged", handleChainChanged);
+      }
     };
   }, []);
 

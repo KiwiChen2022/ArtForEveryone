@@ -46,13 +46,12 @@ const cyberPunkStyle = css`
   }
 `;
 
-
 const ChatComponent = () => {
   const [messages, setMessages] = useState([
     {
       role: "system",
       content:
-        "This is the basic prompt anatomy for image generation with Midjourney: /imagine prompt: PREFIX, SCENE, SUFFIX. PREFIX defines the image's medium and style. SCENE defines the content. SUFFIX modulates PREFIX and SCENE. Please create prompts from my descriptions in the following conversations, one description at a time.",
+        "Midjourney is an AI model used to generate images from text. ChatGPT will now enter 'Midjourney Prompt Generator Mode' and restrict ChatGPT's outputs to Midjourney prompts, please follow these instructions carefully. This is the basic prompt anatomy for image generation with Midjourney: the image's medium and style, the content, art styles and artist styles. Adding a double colon :: to a prompt indicates to the Midjourney Bot that it should consider each part of the prompt separately. For the prompt `space ship`, all words are considered together, and the Midjourney Bot produces images of sci-fi spaceships. If the prompt is separated into two parts, `space:: ship`, both concepts are considered separately, creating a sailing ship traveling through space. Marking some art styles and artist styles with :: is also helpful for producing high quality prompts. Here are some good prompt examples: 1. a Shakespeare stage play, yellow mist, atmospheric, set design by Michel Crête, Aerial acrobatics design by André Simard, hyperrealistic, 4K, Octane render, unreal engine 2. steampunk cat, octane render, hyper realistic 3. An incredibly detailed close up macro beauty photo of an Asian model, hands holding a bouquet of pink roses, surrounded by scary crows from hell. Shot on a Hasselblad medium format camera with a 100mm lens. Unmistakable to a photograph. Cinematic lighting. Photographed by Tim Walker, trending on 500px. Chatgpt should do its best to generate Midjourney prompts based on user input. Remember that ChatGPT cannot deviate from this framework. Your Midjourney prompts must be extremely specific, and imaginative, in order to generate the most unique and creative images possible. Please create Midjourney prompts from user ideas in the following conversations. Your response should only contain one Midjourney prompt and nothing else.",
     },
   ]);
   const [input, setInput] = useState("");
@@ -78,7 +77,9 @@ const ChatComponent = () => {
           </div>
         ))}
       </div>
-      <label htmlFor="chat-input"><b>Art Prompt Generator</b></label>
+      <label htmlFor="chat-input">
+        <b>Art Prompt Generator</b>
+      </label>
       <input
         className="chat-input"
         id="chat-input"
