@@ -11,13 +11,25 @@ import { createTheme } from "./utils/createTheme";
 import eventEmitter from "./utils/eventEmitter";
 import { ErrorMessage } from "./components/ErrorHandler/ErrorMessage";
 import { Message } from "./components/Message";
+import { loadBlockchainData } from "./utils/Blockchain";
 
 function App() {
   const [account, setAccount] = useState(null);
   const [error, setError] = useState<string | null>(null);
   const [message, setMessage] = useState<string | null>(null);
+  const [provider, setProvider] = useState<any>(null);
+  const [nft, setNFT] = useState<any>(null);
 
   useEffect(() => {
+    // Load blockchain data
+    const loadData = async () => {
+      const { provider, nft } = await loadBlockchainData();
+      setProvider(provider);
+      setNFT(nft);
+    };
+    loadData();
+
+    // Handle API errors
     const handleError = (message: string) => {
       setError(message);
       setTimeout(() => setError(null), 10000); // Clear error message after 10 seconds
@@ -70,10 +82,17 @@ function App() {
         <Navigation account={account} setAccount={setAccount} />
         <Router>
           <Routes>
-            <Route path="/" element={<GetStartPage />} />
+            <Route path="/" element={<GetStartPage nft={nft} />} />
             <Route
               path="/main"
-              element={<MainPage account={account} setMessage={setMessage} />}
+              element={
+                <MainPage
+                  account={account}
+                  setMessage={setMessage}
+                  provider={provider}
+                  nft={nft}
+                />
+              }
             />
           </Routes>
         </Router>

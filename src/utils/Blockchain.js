@@ -25,3 +25,8 @@ export const mintImage = async (provider, nft, metadataUrl) => {
   const receipt = await tx.wait();
   console.log("Minted image:", receipt);
 };
+
+export const getTotalSupply = async (nft) => {
+  const totalSupply = await nft.totalSupply();
+  console.log("Total minted NFTs:", totalSupply.toString());
+};
