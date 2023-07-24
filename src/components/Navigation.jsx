@@ -62,8 +62,8 @@ const checkMetaMaskInstalled = () => {
 };
 
 // check Network
-const expectedChainId = 11155111;
-const expectedNetwork = "Sepolia Testnet";
+const expectedChainId = 137;
+const expectedNetwork = "Polygon";
 
 const checkNetwork = async (provider) => {
   const network = await provider.getNetwork();

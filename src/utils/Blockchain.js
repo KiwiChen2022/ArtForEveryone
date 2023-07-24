@@ -5,8 +5,8 @@ import config from "../config.json";
 
 import eventEmitter from "./eventEmitter";
 
-const expectedChainId = 11155111;
-const expectedNetwork = "Sepolia Testnet";
+const expectedChainId = 137;
+const expectedNetwork = "Polygon";
 
 //check if the user has MetaMask installed
 const checkMetaMaskInstalled = () => {
@@ -55,7 +55,7 @@ export const mintImage = async (provider, nft, metadataUrl) => {
   const signer = provider.getSigner();
   const tx = await nft
     .connect(signer)
-    .mint(metadataUrl, { value: ethers.utils.parseEther("0.01") });
+    .mint(metadataUrl, { value: ethers.utils.parseEther("1") });
 
   const receipt = await tx.wait();
   console.log("Minted image:", receipt);
