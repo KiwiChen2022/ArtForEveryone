@@ -7,7 +7,18 @@ const Nav = styled.nav`
   color: #0ff;
   display: flex;
   justify-content: space-between;
-  width: 80%;
+  width: 100%;
+  position: relative;
+
+  &:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #0ff, transparent);
+  }
 `;
 
 const Brand = styled.div`
@@ -15,6 +26,8 @@ const Brand = styled.div`
   font-weight: bold;
   text-shadow: 0 0 10px #0ff, 0 0 20px #0ff, 0 0 30px #0ff, 0 0 40px #0ff;
   user-select: none;
+  margin-right: auto;
+  margin-left: 100px;
 `;
 
 const ConnectButton = styled.button`
@@ -47,6 +60,8 @@ const Actions = styled.div`
   display: flex;
   align-items: center;
   gap: 10px;
+  margin-left: auto;
+  margin-right: 100px;
 `;
 
 // check MetaMask

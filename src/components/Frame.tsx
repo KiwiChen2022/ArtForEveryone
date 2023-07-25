@@ -1,5 +1,4 @@
 import React, { type ReactElement, useMemo } from "react";
-import { createRoot } from "react-dom/client";
 import { type FrameSVGPathGeneric } from "@arwes/frames";
 import { FrameSVG } from "@arwes/react-frames";
 

@@ -22,7 +22,7 @@ export default function BackGround(): ReactElement {
         <GridLines lineColor="hsla(180, 100%, 75%, 0.05)" distance={30} />
         <Dots color="hsla(180, 100%, 75%, 0.05)" distance={30} />
         <MovingLines
-          lineColor="hsla(180, 100%, 75%, 0.07)"
+          lineColor="hsla(180, 100%, 75%, 0.12)"
           distance={30}
           sets={20}
         />
