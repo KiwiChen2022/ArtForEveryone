@@ -1,3 +1,31 @@
+/** @jsxImportSource @emotion/react */
+import { css } from "@emotion/react";
+
+const buttonsContainerStyle = css`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; // 新增
+  flex: 3;
+
+  .positionContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .positionContainer input[type="text"] {
+    padding: 0;
+    text-align: center;
+    background: transparent;
+    line-height: 4; /* 调整这个值以改变文本的垂直位置 */
+    font-size: 1rem;
+    margin: 20px;
+    margin-top: 30px;
+  }
+`;
+
 export default function ButtonsContainer({
   loading,
   handleUpscale,
@@ -7,7 +35,7 @@ export default function ButtonsContainer({
   nfturl,
 }) {
   return (
-    <div className="buttonsContainer">
+    <div css={buttonsContainerStyle}>
       <button onClick={handleUpscale}>Upscale</button>
 
       <div className="positionContainer">

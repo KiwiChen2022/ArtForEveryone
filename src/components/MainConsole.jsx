@@ -11,7 +11,6 @@ import axios from "axios";
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import { Animator, FrameSVGCorners } from "@arwes/react";
-import { Theme } from "../ThemeSettings";
 import { createTheme } from "../utils/createTheme";
 import ChatComponent from "./ChatComponent";
 import eventEmitter from "../utils/eventEmitter";
@@ -33,6 +32,7 @@ const cyberPunkStyle = css`
   display: flex;
   justify-content: center;
   margin-top: 20px;
+  min-height: 90vh;
 
   a {
     color: #0ff;
@@ -115,58 +115,6 @@ const cyberPunkStyle = css`
 
   .formContainer input[type="text"] {
     font-size: 1rem;
-  }
-
-  .imageContainer {
-    position: relative;
-    min-width: 700px;
-    min-height: 700px;
-    display: flex; // 新增
-    align-items: center; // 新增
-    justify-content: center; // 新增
-    margin-bottom: 1rem;
-    flex: 7;
-  }
-
-  .imageContainer img,
-  .imageContainer .frame {
-    position: absolute;
-  }
-
-  .imageContainer img {
-    max-width: 85%;
-    max-height: 85%;
-  }
-
-  .imageContainer .frame {
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-  }
-
-  .buttonsContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center; // 新增
-    flex: 3;
-  }
-
-  .positionContainer {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .positionContainer input[type="text"] {
-    padding: 0;
-    text-align: center;
-    background: transparent;
-    line-height: 4; /* 调整这个值以改变文本的垂直位置 */
-    font-size: 1rem;
-    margin: 20px;
-    margin-top: 30px;
   }
 
   form input[type="submit"] {

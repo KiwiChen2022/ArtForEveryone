@@ -1,10 +1,50 @@
 import { Frame } from "./Frame";
 import { Spinner } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { motion } from "framer-motion";
+
+/** @jsxImportSource @emotion/react */
+import { css } from "@emotion/react";
+
+const imageContainerStyle = css`
+  position: relative;
+  min-width: 70vh;
+  flex: 7;
+  margin-bottom: 1rem;
+  overflow: hidden;
+
+  img {
+    position: relative;
+    max-width: 85%;
+    max-height: 85%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .frame {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
+`;
+const variants = {
+  hidden: { height: 0 },
+  visible: { height: "80vh" },
+};
 
 export default function ImageDisplay({ image, loading, progress }) {
   return (
-    <div className="imageContainer">
+    <motion.div
+      css={imageContainerStyle}
+      initial="hidden"
+      animate="visible"
+      variants={variants}
+      transition={{ duration: 0.5 }}
+    >
       {!loading && image ? (
         <>
           <img src={image} alt="AI Generated Content" />
@@ -22,6 +62,6 @@ export default function ImageDisplay({ image, loading, progress }) {
       <div className="frame">
         <Frame />
       </div>
-    </div>
+    </motion.div>
   );
 }
