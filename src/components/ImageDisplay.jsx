@@ -2,6 +2,9 @@ import { Frame } from "./Frame";
 import { Spinner } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
+import { Animator } from "@arwes/react-animator";
+import { Text } from "@arwes/react-text";
 
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
@@ -31,12 +34,34 @@ const imageContainerStyle = css`
     z-index: -1;
   }
 `;
+
+const loadingContainerStyle = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  textAlign: "center",
+};
+
+const textContainerStyle = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+};
+
 const variants = {
   hidden: { height: 0 },
   visible: { height: "80vh" },
 };
 
 export default function ImageDisplay({ image, loading, progress }) {
+  const [textActive, setTextActive] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => setTextActive((active) => true), 600);
+  }, []);
+
   return (
     <motion.div
       css={imageContainerStyle}
@@ -50,14 +75,20 @@ export default function ImageDisplay({ image, loading, progress }) {
           <img src={image} alt="AI Generated Content" />
         </>
       ) : loading ? (
-        <div style={{ textAlign: "center", padding: "2em" }}>
+        <div style={loadingContainerStyle}>
           <Spinner animation="border" role="status" variant="info" />
-          <p style={{ fontSize: 20, marginTop: -5 }}>
+          <p style={{ fontSize: 20, marginTop: 10 }}>
             <strong>{progress}%</strong>
           </p>
         </div>
       ) : (
-        <></>
+        <div style={textContainerStyle}>
+          <Animator active={textActive}>
+            <Text as="h5" style={{ color: "#D3D3D3" }}>
+              Generate Your NFT Artwork Here!
+            </Text>
+          </Animator>
+        </div>
       )}
       <div className="frame">
         <Frame />

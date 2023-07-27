@@ -5,6 +5,7 @@ import { GalleryFrame } from "./GalleryFrame";
 import GalleryImg from "./GalleryImg";
 import { useTransition, animated } from "react-spring";
 import { useSprings } from "react-spring";
+import NixieContainer from "./Nixietube/Nixietube";
 
 const GalleryContainer = styled.div`
   position: relative;
@@ -31,8 +32,9 @@ const Header = styled.div`
 const Title = styled.h1`
   color: transparent;
   -webkit-text-stroke: 1px #0ff;
-  text-shadow: 0 0 5px #0ff, 0 0 10px #0ff; // Reduced blur distances
   user-select: none; // Prevent user from selecting the text
+  text-shadow: 0 0 5px rgba(0, 255, 255, 0.6), 0 0 10px rgba(0, 255, 255, 0.3),
+    0 0 15px rgba(0, 255, 255, 0.3), 0 0 20px rgba(0, 255, 255, 0.2);
 `;
 
 const ScrollButtons = styled.div`
@@ -68,7 +70,7 @@ const Image = styled.img`
   height: auto;
 `;
 
-const Gallery = ({ images }) => {
+const Gallery = ({ images, totalSupply }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const handlePreviousClick = () => {
@@ -121,6 +123,7 @@ const Gallery = ({ images }) => {
           />
         ))}
       </ImagesRow>
+      <NixieContainer number={totalSupply} />
     </GalleryContainer>
   );
 };

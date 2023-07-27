@@ -95,6 +95,7 @@ const cyberPunkStyle = css`
 
   button {
     width: 160px;
+    box-shadow: 0 0 5px #0ff;
   }
 
   .formContainer {
@@ -213,7 +214,6 @@ function MainConsole({ provider, nft, account, setMessage }) {
       return;
     }
 
-    setLoading(true);
     console.log("upscaled image", image);
 
     // Download the image in the front end
@@ -229,7 +229,6 @@ function MainConsole({ provider, nft, account, setMessage }) {
       console.error("Failed to download image in the front end:", error);
       const temp = error.message || "Error";
       eventEmitter.emit("apiError", temp);
-      setLoading(false);
       return;
     }
 
@@ -260,8 +259,6 @@ function MainConsole({ provider, nft, account, setMessage }) {
       const temp = error.message || "Error";
       eventEmitter.emit("apiError", temp);
     }
-
-    setLoading(false);
   };
 
   const submitHandler = async (e) => {
@@ -300,10 +297,13 @@ function MainConsole({ provider, nft, account, setMessage }) {
             zIndex: -1,
             "& [data-name=bg]": {
               // color: `${theme.color.primary(1)} !important`,
-              color: `hsla(180, 75%, 10%,0.5) !important`,
+              color: `hsla(180, 75%, 10%,0.4) !important`,
+              // color: "rgba(0, 0, 0, 0.4) !important",
             },
             "& [data-name=line]": {
-              color: `${theme.color.primary(4)} !important`,
+              // color: `${theme.color.primary(10)} !important`,
+              color: `hsla(180, 75%, 60%,1) !important`,
+              // stroke: "#007f7f", // Dark line color
             },
           }}
           strokeWidth={2}

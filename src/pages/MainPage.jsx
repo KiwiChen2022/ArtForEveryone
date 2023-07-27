@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { loadBlockchainData } from "../utils/Blockchain";
+import React from "react";
 import MainConsole from "../components/MainConsole";
 
 function MainPage({ account, setMessage, provider, nft }) {

@@ -1,10 +1,13 @@
 import styles from "./Nixietube.module.scss";
 import React from "react";
 
-
 function NixieTube({ number }) {
   const digits = [...Array(10).keys()].map((i) => (
-    <span className={`${styles.nixieContainerTubeDigit} ${i === number ? styles.nixieContainerTubeDigitActive : ""}`}>
+    <span
+      className={`${styles.nixieContainerTubeDigit} ${
+        i === number ? styles.nixieContainerTubeDigitActive : ""
+      }`}
+    >
       {i}
     </span>
   ));
@@ -17,5 +20,10 @@ export default function NixieContainer({ number }) {
   const tubes = numArr.map((num, index) => (
     <NixieTube key={index} number={num} />
   ));
-  return <div className={styles.nixieContainer}>{tubes}</div>;
+  return (
+    <div className={styles.container}>
+      <div className={styles.nixieContainer}>{tubes}</div>
+      {/* <div className={styles.text}>NFTs</div> */}
+    </div>
+  );
 }

@@ -9,6 +9,7 @@ const Nav = styled.nav`
   justify-content: space-between;
   width: 100%;
   position: relative;
+  height: 4rem;
 
   &:after {
     content: "";
@@ -24,10 +25,13 @@ const Nav = styled.nav`
 const Brand = styled.div`
   font-size: 1.5rem;
   font-weight: bold;
-  text-shadow: 0 0 10px #0ff, 0 0 20px #0ff, 0 0 30px #0ff, 0 0 40px #0ff;
   user-select: none;
   margin-right: auto;
   margin-left: 100px;
+  color: transparent;
+  -webkit-text-stroke: 1px #0ff;
+  text-shadow: 0 0 5px rgba(0, 255, 255, 0.6), 0 0 10px rgba(0, 255, 255, 0.3),
+    0 0 15px rgba(0, 255, 255, 0.3), 0 0 20px rgba(0, 255, 255, 0.2); // Add one more layer with full opacity
 `;
 
 const ConnectButton = styled.button`
