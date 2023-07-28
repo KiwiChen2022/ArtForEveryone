@@ -1,5 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
+import { useRef } from "react";
+import { swapFace } from "../utils/MidjourneyAPI";
 
 const buttonsContainerStyle = css`
   display: flex;
@@ -33,7 +35,22 @@ export default function ButtonsContainer({
   setPosition,
   handleUploadNFT,
   nfturl,
+  image,
+  setImage,
 }) {
+  const fileInputRef = useRef(); // 创建一个ref来访问文件输入元素
+
+  // 创建一个新的事件处理函数
+  const handleSwapFace = async () => {
+    if (fileInputRef.current.files.length > 0) {
+      const file = fileInputRef.current.files[0];
+      const response = await swapFace(file, image);
+      console.log(response);
+      // 处理响应...
+      setImage(response.url);
+    }
+  };
+
   return (
     <div css={buttonsContainerStyle}>
       <button onClick={handleUpscale}>Upscale</button>
@@ -53,6 +70,15 @@ export default function ButtonsContainer({
           disabled={position === 4}
         />
       </div>
+
+      {/* 添加一个新的按钮和文件输入元素 */}
+      <input
+        type="file"
+        ref={fileInputRef}
+        style={{ display: "none" }}
+        onChange={handleSwapFace}
+      />
+      <button onClick={() => fileInputRef.current.click()}>Swap Face</button>
 
       <button onClick={handleUploadNFT}>Mint</button>
       {!loading && nfturl ? (

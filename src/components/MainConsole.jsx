@@ -328,6 +328,8 @@ function MainConsole({ provider, nft, account, setMessage }) {
         setPosition={setPosition}
         handleUploadNFT={handleUploadNFT}
         nfturl={nfturl}
+        image={image}
+        setImage={setImage}
       />
     </div>
   );
