@@ -108,6 +108,7 @@ function App() {
               element={
                 <MainPage
                   account={account}
+                  message={message}
                   setMessage={setMessage}
                   provider={provider}
                   nft={nft}

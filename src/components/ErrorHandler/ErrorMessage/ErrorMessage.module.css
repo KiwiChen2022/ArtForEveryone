@@ -1,16 +1,19 @@
 .errorMessage {
   background-color: transparent;
   border: 2px solid #f50057;
-  color: #f50057; 
+  color: #f50057;
   padding: 1rem;
+  padding-right: 3rem;
   margin-bottom: 1rem;
   border-radius: 5px;
   font-size: 1rem;
   position: relative;
-  font-family: 'Orbitron', sans-serif;
+  font-family: "Orbitron", sans-serif;
+  position: fixed;
+  bottom: 20px;
+  right: 50px;
+  z-index: 100;
 }
-
-
 
 .closeButton {
   position: absolute;

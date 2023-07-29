@@ -3,22 +3,18 @@
   border: 2px solid #0ff;
   color: #0ff;
   padding: 1rem;
-  padding-right: 3rem;
   margin-bottom: 1rem;
   border-radius: 5px;
   font-size: 1rem;
-  position: relative;
   font-family: "Orbitron", sans-serif;
-  position: fixed;
-  bottom: 20px;
-  right: 50px;
-  z-index: 100;
+  position: relative !important;
+  margin-top: 30px;
+  bottom: 0;
 }
 
 .closeButton {
   position: absolute;
-  top: 8px;
-  right: 8px;
+
   background: none;
   border: none;
   cursor: pointer;

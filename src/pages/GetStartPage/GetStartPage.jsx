@@ -48,12 +48,21 @@ function GetStartPage({ nft }) {
     fetchTotalSupply();
   }, [nft]);
 
+  // const links = [
+  //   "https://cdn.midjourney.com/9b5ee37c-0d3b-482d-a88c-a57452e842d9/0_2.png",
+  //   "https://cdn.midjourney.com/c7f3c063-6c2e-47e7-bb16-051922ea18f2/0_0.png",
+  //   "https://cdn.midjourney.com/5cb56820-113b-4c96-925e-330c3b24a8ce/0_3.png",
+  //   "https://cdn.midjourney.com/c7b8a50a-8bdf-4c56-ba55-64b4cbf5b56e/0_2.png",
+  // ];
   const links = [
-    "https://cdn.midjourney.com/9b5ee37c-0d3b-482d-a88c-a57452e842d9/0_2.png",
-    "https://cdn.midjourney.com/c7f3c063-6c2e-47e7-bb16-051922ea18f2/0_0.png",
-    "https://cdn.midjourney.com/5cb56820-113b-4c96-925e-330c3b24a8ce/0_3.png",
-    "https://cdn.midjourney.com/c7b8a50a-8bdf-4c56-ba55-64b4cbf5b56e/0_2.png",
+    "/images/image1.jpg",
+    "/images/image2.jpg",
+    "/images/image1.jpg",
+    "/images/image2.jpg",
+    // ...
+    // "/images/image12.png",
   ];
+
   const length = links.length;
   const newLength = length - (length % 4); // 计算新的数组长度，使之为4的倍数
   const midjourneyimages = links.slice(0, newLength);

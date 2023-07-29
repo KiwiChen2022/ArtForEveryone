@@ -1,7 +1,8 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
-import { useRef } from "react";
+import { useState, useRef } from "react";
 import { swapFace } from "../utils/MidjourneyAPI";
+import { FaceSwapMessage } from "./FaceSwapMessage";
 
 const buttonsContainerStyle = css`
   display: flex;
@@ -36,9 +37,9 @@ export default function ButtonsContainer({
   handleUploadNFT,
   nfturl,
   image,
-  setImage,
 }) {
   const fileInputRef = useRef(); // 创建一个ref来访问文件输入元素
+  const [message, setMessage] = useState(null);
 
   // 创建一个新的事件处理函数
   const handleSwapFace = async () => {
@@ -47,7 +48,8 @@ export default function ButtonsContainer({
       const response = await swapFace(file, image);
       console.log(response);
       // 处理响应...
-      setImage(response.url);
+      const message = `For security and privacy reasons, we currently do not support the minting of NFTs for face swap image. You can download the image <a href=${response.url}>here</a>`;
+      setMessage(message);
     }
   };
 
@@ -80,7 +82,15 @@ export default function ButtonsContainer({
       />
       <button onClick={() => fileInputRef.current.click()}>Swap Face</button>
 
-      <button onClick={handleUploadNFT}>Mint</button>
+      <button
+        onClick={handleUploadNFT}
+        style={{
+          marginTop: "100px",
+          marginBottom: "20px",
+        }}
+      >
+        Mint
+      </button>
       {!loading && nfturl ? (
         <p>
           View&nbsp;
@@ -90,6 +100,14 @@ export default function ButtonsContainer({
         </p>
       ) : (
         <></>
+      )}
+      {message && (
+        <FaceSwapMessage
+          message={message}
+          onClose={() => {
+            setMessage(null);
+          }}
+        />
       )}
     </div>
   );

@@ -11,16 +11,11 @@ import axios from "axios";
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import { Animator, FrameSVGCorners } from "@arwes/react";
-import { createTheme } from "../utils/createTheme";
 import ChatComponent from "./ChatComponent";
 import eventEmitter from "../utils/eventEmitter";
 import ImageForm from "./ImageForm";
 import ImageDisplay from "./ImageDisplay";
 import ButtonsContainer from "./ButtonsContainer";
-
-const theme = createTheme({
-  outline: 3,
-});
 
 const cyberPunkStyle = css`
   position: relative;
@@ -123,7 +118,7 @@ const cyberPunkStyle = css`
   }
 `;
 
-function MainConsole({ provider, nft, account, setMessage }) {
+function MainConsole({ provider, nft, account, message, setMessage }) {
   const [image, setImage] = useState(null);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -151,16 +146,18 @@ function MainConsole({ provider, nft, account, setMessage }) {
             result.status === "paused" ||
             result.status === "waiting-to-start"
           ) {
-            // Keep polling, do nothing here
+            setMessage("Waiting for the task to start...");
             console.log(result.status); // print the status
           } else if (result.status === "running") {
             const percent = result.percentage;
             setProgress(percent);
+            setMessage("Task is running, please wait...");
           } else if (result.imageURL) {
             clearInterval(interval);
             console.log("image url", result.imageURL); // print the image URL
             resolve(result.imageURL);
             setProgress(0);
+            setMessage("Image generated successfully!");
           } else {
             // If we received an unknown status or no data at all, reject the promise
             clearInterval(interval);
@@ -265,7 +262,7 @@ function MainConsole({ provider, nft, account, setMessage }) {
     e.preventDefault();
 
     setLoading(true);
-
+    setMessage("Waiting for the task to start...");
     const taskIdResponse = await createImage(description);
     if (taskIdResponse) {
       console.log("taskId", taskIdResponse);
@@ -281,7 +278,7 @@ function MainConsole({ provider, nft, account, setMessage }) {
         });
     }
     setProgress(0); // reset progress bar
-    setMessage(null); // clear message
+    // setMessage(null); // clear message
   };
 
   return (
@@ -329,7 +326,6 @@ function MainConsole({ provider, nft, account, setMessage }) {
         handleUploadNFT={handleUploadNFT}
         nfturl={nfturl}
         image={image}
-        setImage={setImage}
       />
     </div>
   );
