@@ -63,6 +63,7 @@ const ImagesRow = styled.div`
   justify-content: space-between;
   margin-left: 3rem;
   margin-right: 3rem;
+  width: 80vw;
 `;
 
 const Image = styled.img`
@@ -115,13 +116,11 @@ const Gallery = ({ images, totalSupply }) => {
         </ScrollButtons>
       </Header>
       <ImagesRow>
-        {images.slice(currentIndex, currentIndex + 4).map((src, index) => (
-          <GalleryImg
-            image={src}
-            title={`Image ${index + 1}`}
-            description={`Description ${index + 1}`}
-          />
-        ))}
+        {images
+          .slice(currentIndex, currentIndex + 4)
+          .map(({ image, title, description }) => (
+            <GalleryImg image={image} title={title} description={description} />
+          ))}
       </ImagesRow>
       <NixieContainer number={totalSupply} />
     </GalleryContainer>

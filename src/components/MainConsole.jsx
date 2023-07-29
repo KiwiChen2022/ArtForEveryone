@@ -141,6 +141,15 @@ function MainConsole({ provider, nft, account, message, setMessage }) {
           if (!result || Object.keys(result).length === 0) {
             // Handle empty response, keep polling
             console.log("Empty response, keep polling.");
+            clearInterval(interval);
+            const errorMessage =
+              "Unknown task status or no data: " + JSON.stringify(result);
+            eventEmitter.emit("apiError", errorMessage);
+            reject(
+              new Error(
+                "Unknown task status or no data: " + JSON.stringify(result)
+              )
+            );
           } else if (
             result.status === "pending" ||
             result.status === "paused" ||
@@ -161,6 +170,9 @@ function MainConsole({ provider, nft, account, message, setMessage }) {
           } else {
             // If we received an unknown status or no data at all, reject the promise
             clearInterval(interval);
+            const errorMessage =
+              "Unknown task status or no data: " + JSON.stringify(result);
+            eventEmitter.emit("apiError", errorMessage);
             reject(
               new Error(
                 "Unknown task status or no data: " + JSON.stringify(result)

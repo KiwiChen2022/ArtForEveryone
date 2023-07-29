@@ -48,19 +48,77 @@ function GetStartPage({ nft }) {
     fetchTotalSupply();
   }, [nft]);
 
-  // const links = [
-  //   "https://cdn.midjourney.com/9b5ee37c-0d3b-482d-a88c-a57452e842d9/0_2.png",
-  //   "https://cdn.midjourney.com/c7f3c063-6c2e-47e7-bb16-051922ea18f2/0_0.png",
-  //   "https://cdn.midjourney.com/5cb56820-113b-4c96-925e-330c3b24a8ce/0_3.png",
-  //   "https://cdn.midjourney.com/c7b8a50a-8bdf-4c56-ba55-64b4cbf5b56e/0_2.png",
-  // ];
   const links = [
-    "/images/image1.jpg",
-    "/images/image2.jpg",
-    "/images/image1.jpg",
-    "/images/image2.jpg",
-    // ...
-    // "/images/image12.png",
+    {
+      image: "/images/image5.jpg",
+      title: "Floating Elephants in a Teacup",
+      description: "surrealism, floating elephants in a teacup::",
+    },
+    {
+      image: "/images/image6.jpg",
+      title: "Emotions",
+      description: "abstract art::emotions::ethereal::watercolor style",
+    },
+    {
+      image: "/images/image7.jpg",
+      title: "Philosophical Ideas",
+      description:
+        "abstract art::philosophical ideas, vibrant colors, surrealistic style, influenced by Salvador Dali and Piet Mondrian.",
+    },
+    {
+      image: "/images/image8.jpg",
+      title: "A Dreamy Profile in Anime Style",
+      description:
+        "anime style, profile view, girl's upper body, dreamy atmosphere, glowing lights, ethereal colors, soft brush strokes, digital painting technique",
+    },
+    {
+      image: "/images/image1.jpg",
+      title: "Profile closeup of a cyberpunk man",
+      description:
+        "cyberpunk:: boy, close-up, neon lights, glitch effects, art style: digital painting by Sparth, 4K resolution, Unreal Engine render",
+    },
+    {
+      image: "/images/image2.jpg",
+      title: "Profile photo in the style of Makoto Shinkai",
+      description:
+        "anime style, dreamy profile, soft pastel colors, background of cherry blossoms, artist style by Makoto Shinkai",
+    },
+    {
+      image: "/images/image3.jpg",
+      title: "Victorian Impressions in Monet's Palette",
+      description:
+        "victorian era, oil painting, opulent ballroom, impressionist art style, Monet's color palette",
+    },
+    {
+      image: "/images/image4.jpg",
+      title: "Dancer",
+      description:
+        "a ballet dancer gracefully twirling amidst a tornado, captured in a surreal and ethereal art style by Margarita Kareva, known for her whimsical and dreamlike photography. Rendered in high resolution with vibrant colors and delicate details.",
+    },
+    {
+      image: "/images/image9.jpg",
+      title: "Lightning Warrior",
+      description:
+        "a Lightning Warrior:: digital painting, dynamic and energetic, art style inspired by anime/manga, background with stormy clouds and electric bolts, artist style of Kuvshinov Ilya",
+    },
+    {
+      image: "/images/image10.jpg",
+      title: "Flame Demon",
+      description:
+        "A fire elemental:: engulfed in flames, casting a blazing light, surrounded by swirling embers and sparks. Art style inspired by Studio Ghibli, with vibrant colors and soft, ethereal textures.",
+    },
+    {
+      image: "/images/image11.jpg",
+      title: "Cronus' Devouring",
+      description:
+        "myths and legends::Greek mythology::Cronus devouring his children, atmospheric, oil painting, high contrast, Caravaggio-inspired lighting, dramatic shadows",
+    },
+    {
+      image: "/images/image12.jpg",
+      title: "Water Elemental Fairy",
+      description:
+        "Water Elemental Fairy, anime style, vibrant colors, flowing water effects, art style by Akihiko Yoshida, 4K resolution, digital painting",
+    },
   ];
 
   const length = links.length;

@@ -9,6 +9,7 @@ const CardContainer = styled.div`
   overflow: hidden;
   position: relative;
   margin: 3rem;
+  flex: 1;
 
   box-shadow: 0 0 5px rgba(0, 255, 255, 0.6), 0 0 10px rgba(0, 255, 255, 0.6),
     0 0 15px rgba(0, 255, 255, 0.6), 0 0 20px rgba(0, 255, 255, 0.6);
@@ -39,12 +40,18 @@ const Content = styled.div`
 const Title = styled.h3`
   margin-bottom: 10px;
   text-transform: uppercase;
-  font-size: 1.2rem;
+  font-size: 1rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 
 const Description = styled.p`
   color: rgba(255, 255, 255, 0.7);
   line-height: 1.5;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 
 const GalleryImg = ({ image, title, description }) => {
