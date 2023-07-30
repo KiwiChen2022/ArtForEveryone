@@ -23,3 +23,7 @@ This project has drawn its inspiration from the AI NFT generator found at [dappu
 ## Deploy
 This project has been deployed utilizing a variety of AWS services, embracing the full potential of cloud computing. Services employed in this project include AWS Elastic Beanstalk for application deployment and management, CloudFront for content delivery, Certificate Manager for handling secure sockets layer (SSL) certificates, S3 for storage, CloudFormation for resource orchestration, API Gateway for handling RESTful APIs, IAM Identity Center for managing access to AWS services and resources, EC2 for scalable computing capacity, and Route 53 for domain registration and DNS routing. The successful implementation of these services ensures a smooth, reliable, and secure user experience on our platform.
 
+## Problem & Our Solution
+![Description](https://face-img-storage.s3.ap-southeast-1.amazonaws.com/motivation.png)
+
+
