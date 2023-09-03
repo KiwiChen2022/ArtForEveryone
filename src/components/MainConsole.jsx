@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import {
   createImage,
   getTaskResult,
@@ -16,6 +16,7 @@ import eventEmitter from "../utils/eventEmitter";
 import ImageForm from "./ImageForm";
 import ImageDisplay from "./ImageDisplay";
 import ButtonsContainer from "./ButtonsContainer";
+import { MainPageContext } from "../contexts/MainPageContext";
 
 const cyberPunkStyle = css`
   position: relative;
@@ -118,7 +119,9 @@ const cyberPunkStyle = css`
   }
 `;
 
-function MainConsole({ provider, nft, account, message, setMessage }) {
+function MainConsole() {
+  const { account, message, setMessage, provider, nft } =
+    useContext(MainPageContext);
   const [image, setImage] = useState(null);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");

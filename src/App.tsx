@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext, createContext } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import GetStartPage from "./pages/GetStartPage/GetStartPage";
 import MainPage from "./pages/MainPage";
@@ -16,6 +16,7 @@ import { Provider } from "react-redux";
 import store from "./redux/store";
 import { I18nextProvider } from "react-i18next";
 import i18n from "./i18n";
+import { MainPageContext } from "./contexts/MainPageContext";
 
 function App() {
   const [account, setAccount] = useState(null);
@@ -111,13 +112,18 @@ function App() {
               <Route
                 path="/main"
                 element={
-                  <MainPage
-                    account={account}
-                    message={message}
-                    setMessage={setMessage}
-                    provider={provider}
-                    nft={nft}
-                  />
+                  // <MainPage
+                  //   account={account}
+                  //   message={message}
+                  //   setMessage={setMessage}
+                  //   provider={provider}
+                  //   nft={nft}
+                  // />
+                  <MainPageContext.Provider
+                    value={{ account, message, setMessage, provider, nft }}
+                  >
+                    <MainPage />
+                  </MainPageContext.Provider>
                 }
               />
             </Routes>

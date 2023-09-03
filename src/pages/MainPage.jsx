@@ -1,16 +1,10 @@
 import React from "react";
 import MainConsole from "../components/MainConsole";
 
-function MainPage({ account, message, setMessage, provider, nft }) {
+function MainPage() {
   return (
     <div>
-      <MainConsole
-        provider={provider}
-        nft={nft}
-        account={account}
-        message={message}
-        setMessage={setMessage}
-      />
+      <MainConsole />
     </div>
   );
 }
