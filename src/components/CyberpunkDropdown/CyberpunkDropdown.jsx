@@ -4,17 +4,19 @@ import { Menu, Dropdown, Button } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 import i18n from "../../i18n";
 import "./CyberpunkDropdown.css";
+import { changeLanguage } from "../../redux/actions";
 
 function CyberpunkDropdown() {
   const dispatch = useDispatch();
   const language = useSelector((state) => state.language);
 
   const handleLanguageChange = ({ key }) => {
-    i18n.changeLanguage(key);
-    dispatch({
-      type: "SET_LANGUAGE",
-      language: key,
-    });
+    // i18n.changeLanguage(key);
+    // dispatch({
+    //   type: "SET_LANGUAGE",
+    //   language: key,
+    // });
+    dispatch(changeLanguage(key));
   };
 
   const menu = (

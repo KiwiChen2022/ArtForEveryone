@@ -1,10 +1,12 @@
+import { CHANGE_LANGUAGE } from "../actions";
+
 const initialState = {
   language: "en",
 };
 
 function languageReducer(state = initialState, action) {
   switch (action.type) {
-    case "SET_LANGUAGE":
+    case CHANGE_LANGUAGE:
       return {
         ...state,
         language: action.language,
