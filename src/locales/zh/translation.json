@@ -1,0 +1,23 @@
+{
+  "startPage": {
+    "gallery": "画廊",
+    "getStart": "开始"
+  },
+  "mainPage": {
+    "artPromptGenerator": "艺术提示生成器",
+    "unleashCreativity": "在这里释放您的创造力...",
+    "generator": "生成",
+    "createYourImage": "创建您的图像",
+    "createName": "创建名称...",
+    "createDescription": "创建描述...",
+    "create": "创建",
+    "generateNFT": "在这里生成您的NFT艺术作品!",
+    "upscale": "放大图片",
+    "position": "位置",
+    "swapFace": "图片换脸",
+    "mint": "铸造NFT"
+  },
+  "navigationBar": {
+    "connect": "连接"
+  }
+}

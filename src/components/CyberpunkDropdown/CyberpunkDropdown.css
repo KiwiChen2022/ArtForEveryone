@@ -1,0 +1,27 @@
+.cyberpunk-btn {
+  background-color: #000;
+  border-color: #007f7f; /* 青色赛博朋克风格 */
+  color: #007f7f;
+  font-weight: bold;
+  text-shadow: 0 0 5px rgba(0, 127, 127, 0.5);
+}
+
+.cyberpunk-btn:hover {
+  background-color: #001818; /* 深青色背景 */
+  color: #00ffff; /* 青色 */
+  border-color: #00ffff;
+}
+
+.ant-dropdown-menu {
+  background-color: #001818;
+  border-color: #007f7f;
+}
+
+.ant-dropdown-menu-item {
+  color: #007f7f;
+}
+
+.ant-dropdown-menu-item:hover {
+  background-color: #002828;
+  color: #00ffff;
+}

@@ -4,6 +4,7 @@ import { sendMessageApi } from "../utils/ChatgptAPI";
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import ChatMessage from "./ChatMessage";
+import { useTranslation } from "react-i18next";
 
 const cyberPunkStyle = css`
   color: #0ff;
@@ -48,6 +49,7 @@ const cyberPunkStyle = css`
 `;
 
 const ChatComponent = () => {
+  const { t } = useTranslation();
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
 
@@ -85,17 +87,17 @@ const ChatComponent = () => {
         ))}
       </div>
       <label htmlFor="chat-input">
-        <b>Art Prompt Generator</b>
+        <b>{t("mainPage.artPromptGenerator")}</b>
       </label>
       <input
         className="chat-input"
         id="chat-input"
         type="text"
         value={input}
-        placeholder="Unleash your creativity here..."
+        placeholder={t("mainPage.unleashCreativity")}
         onChange={(e) => setInput(e.target.value)}
       />
-      <button onClick={sendMessage}>Generate</button>
+      <button onClick={sendMessage}>{t("mainPage.generator")}</button>
     </div>
   );
 };

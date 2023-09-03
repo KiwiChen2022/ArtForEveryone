@@ -2,9 +2,8 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "@emotion/styled";
-import NixieContainer from "../../components/Nixietube/Nixietube";
-import { Card } from "../../components/Card";
 import Gallery from "../../components/Gallery";
+import { useTranslation } from "react-i18next";
 
 const Container = styled.div`
   display: flex;
@@ -32,8 +31,10 @@ const StartButton = styled.button`
 `;
 
 function GetStartPage({ nft }) {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [totalSupply, setTotalSupply] = useState(0);
+  // console.log("t； ", t("startPage.getStart"));
 
   const handleGetStartClick = () => {
     navigate("/main");
@@ -128,7 +129,9 @@ function GetStartPage({ nft }) {
   return (
     <Container>
       <Gallery images={midjourneyimages} totalSupply={totalSupply} />
-      <StartButton onClick={handleGetStartClick}>Get Start</StartButton>
+      <StartButton onClick={handleGetStartClick}>
+        {t("startPage.getStart")}
+      </StartButton>
       {/* <Card /> */}
       {/* <NixieContainer number={totalSupply} /> */}
     </Container>

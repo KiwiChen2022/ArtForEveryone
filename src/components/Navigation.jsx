@@ -1,6 +1,8 @@
 import { ethers } from "ethers";
 import styled from "@emotion/styled";
 import eventEmitter from "../utils/eventEmitter";
+import CyberpunkDropdown from "./CyberpunkDropdown/CyberpunkDropdown";
+import { useTranslation } from "react-i18next";
 
 // create styled components
 const Nav = styled.nav`
@@ -98,6 +100,7 @@ const checkNetwork = async (provider) => {
 
 // use styled components
 const Navigation = ({ account, setAccount }) => {
+  const { t } = useTranslation();
   const connectHandler = async () => {
     // Check if the user has MetaMask installed
     if (!checkMetaMaskInstalled()) return;
@@ -233,9 +236,10 @@ const Navigation = ({ account, setAccount }) => {
           </ConnectButton>
         ) : (
           <ConnectButton type="button" onClick={connectHandler}>
-            Connect
+            {t("navigationBar.connect")}
           </ConnectButton>
         )}
+        <CyberpunkDropdown />
       </Actions>
     </Nav>
   );

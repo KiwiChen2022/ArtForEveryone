@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { Animator } from "@arwes/react-animator";
 import { Text } from "@arwes/react-text";
-
+import { useTranslation } from "react-i18next";
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 
@@ -57,7 +57,7 @@ const variants = {
 
 export default function ImageDisplay({ image, loading, progress }) {
   const [textActive, setTextActive] = useState(false);
-
+  const { t } = useTranslation();
   useEffect(() => {
     setTimeout(() => setTextActive((active) => true), 600);
   }, []);
@@ -85,7 +85,7 @@ export default function ImageDisplay({ image, loading, progress }) {
         <div style={textContainerStyle}>
           <Animator active={textActive}>
             <Text as="h5" style={{ color: "#D3D3D3" }}>
-              Generate Your NFT Artwork Here!
+              {t("mainPage.generateNFT")}
             </Text>
           </Animator>
         </div>

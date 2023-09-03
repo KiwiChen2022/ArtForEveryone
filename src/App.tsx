@@ -12,6 +12,10 @@ import eventEmitter from "./utils/eventEmitter";
 import { ErrorMessage } from "./components/ErrorHandler/ErrorMessage";
 import { Message } from "./components/Message";
 import { loadBlockchainData } from "./utils/Blockchain";
+import { Provider } from "react-redux";
+import store from "./redux/store";
+import { I18nextProvider } from "react-i18next";
+import i18n from "./i18n";
 
 function App() {
   const [account, setAccount] = useState(null);
@@ -67,58 +71,60 @@ function App() {
   });
 
   return (
-    <>
-      {error && (
-        <ErrorMessage
-          message={error}
-          onClose={() => {
-            setError(null);
+    <I18nextProvider i18n={i18n}>
+      <Provider store={store}>
+        {error && (
+          <ErrorMessage
+            message={error}
+            onClose={() => {
+              setError(null);
+            }}
+          />
+        )}
+        {message && (
+          <Message
+            message={message}
+            onClose={() => {
+              setMessage(null);
+            }}
+          />
+        )}
+        <Global
+          styles={{
+            html: {
+              margin: theme.space(2),
+              backgroundColor: "none",
+            },
+            body: {
+              fontFamily: theme.font(1).fontFamily,
+              color: theme.color.secondary(16),
+              backgroundColor: "none",
+            },
           }}
         />
-      )}
-      {message && (
-        <Message
-          message={message}
-          onClose={() => {
-            setMessage(null);
-          }}
-        />
-      )}
-      <Global
-        styles={{
-          html: {
-            margin: theme.space(2),
-            backgroundColor: "none",
-          },
-          body: {
-            fontFamily: theme.font(1).fontFamily,
-            color: theme.color.secondary(16),
-            backgroundColor: "none",
-          },
-        }}
-      />
-      <BackGround />
-      <div className={styles.appContainer}>
-        <Navigation account={account} setAccount={setAccount} />
-        <Router>
-          <Routes>
-            <Route path="/" element={<GetStartPage nft={nft} />} />
-            <Route
-              path="/main"
-              element={
-                <MainPage
-                  account={account}
-                  message={message}
-                  setMessage={setMessage}
-                  provider={provider}
-                  nft={nft}
-                />
-              }
-            />
-          </Routes>
-        </Router>
-      </div>
-    </>
+        <BackGround />
+        <div className={styles.appContainer}>
+          <Navigation account={account} setAccount={setAccount} />
+          <Router>
+            <Routes>
+              <Route path="/" element={<GetStartPage nft={nft} />} />
+              <Route
+                path="/main"
+                element={
+                  <MainPage
+                    account={account}
+                    message={message}
+                    setMessage={setMessage}
+                    provider={provider}
+                    nft={nft}
+                  />
+                }
+              />
+            </Routes>
+          </Router>
+        </div>
+      </Provider>
+    </I18nextProvider>
   );
 }
 

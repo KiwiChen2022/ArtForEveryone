@@ -1,0 +1,23 @@
+{
+  "startPage": {
+    "gallery": "Gallery",
+    "getStart": "Get Start"
+  },
+  "mainPage": {
+    "artPromptGenerator": "Art Prompt Generator",
+    "unleashCreativity": "Unleash your creativity here...",
+    "generator": "Generator",
+    "createYourImage": "Create Your Image",
+    "createName": "Create a name...",
+    "createDescription": "Create a description...",
+    "create": "Create",
+    "generateNFT": "Generate Your NFT Artwork Here!",
+    "upscale": "Upscale",
+    "position": "Position",
+    "swapFace": "Swap Face",
+    "mint": "Mint"
+  },
+  "navigationBar": {
+    "connect": "Connect"
+  }
+}

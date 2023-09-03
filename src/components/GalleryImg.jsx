@@ -54,16 +54,16 @@ const Description = styled.p`
   white-space: nowrap;
 `;
 
-const GalleryImg = ({ image, title, description }) => {
+const GalleryImg = React.memo(({ image, title, description }) => {
   return (
     <CardContainer>
-      <Image src={image} alt={title} />
+      <Image src={image} alt={title} loading="lazy" />
       <Content>
         <Title>{title}</Title>
         <Description>{description}</Description>
       </Content>
     </CardContainer>
   );
-};
+});
 
 export default GalleryImg;

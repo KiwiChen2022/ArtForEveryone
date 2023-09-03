@@ -3,6 +3,7 @@ import { css } from "@emotion/react";
 import { useState, useRef } from "react";
 import { swapFace } from "../utils/MidjourneyAPI";
 import { FaceSwapMessage } from "./FaceSwapMessage";
+import { useTranslation } from "react-i18next";
 
 const buttonsContainerStyle = css`
   display: flex;
@@ -40,6 +41,7 @@ export default function ButtonsContainer({
 }) {
   const fileInputRef = useRef(); // 创建一个ref来访问文件输入元素
   const [message, setMessage] = useState(null);
+  const { t } = useTranslation();
 
   // 创建一个新的事件处理函数
   const handleSwapFace = async () => {
@@ -55,7 +57,7 @@ export default function ButtonsContainer({
 
   return (
     <div css={buttonsContainerStyle}>
-      <button onClick={handleUpscale}>Upscale</button>
+      <button onClick={handleUpscale}>{t("mainPage.upscale")}</button>
 
       <div className="positionContainer">
         <input
@@ -64,7 +66,11 @@ export default function ButtonsContainer({
           onClick={() => setPosition(Math.max(1, position - 1))}
           disabled={position === 1}
         />
-        <input type="text" value={`Position: ${position}`} readOnly />
+        <input
+          type="text"
+          value={`${t("mainPage.position")}: ${position}`}
+          readOnly
+        />
         <input
           type="button"
           value=">"
@@ -80,7 +86,9 @@ export default function ButtonsContainer({
         style={{ display: "none" }}
         onChange={handleSwapFace}
       />
-      <button onClick={() => fileInputRef.current.click()}>Swap Face</button>
+      <button onClick={() => fileInputRef.current.click()}>
+        {t("mainPage.swapFace")}
+      </button>
 
       <button
         onClick={handleUploadNFT}
@@ -89,7 +97,7 @@ export default function ButtonsContainer({
           marginBottom: "20px",
         }}
       >
-        Mint
+        {t("mainPage.mint")}
       </button>
       {!loading && nfturl ? (
         <p>
